@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProAgil.WebApi.Data;
 using ProAgil.WebApi.Model;
@@ -28,25 +29,25 @@ namespace ProAgil.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+        //[HttpGet]
+        //public IEnumerable<WeatherForecast> Get()
+        //{
+        //    var rng = new Random();
+        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //    {
+        //        Date = DateTime.Now.AddDays(index),
+        //        TemperatureC = rng.Next(-20, 55),
+        //        Summary = Summaries[rng.Next(Summaries.Length)]
+        //    })
+        //    .ToArray();
+        //}
 
-        [HttpGet("Evento")]
-        public ActionResult<IEnumerable<Evento>> GetEvento()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Evento>>> Get()
         {
             try
             {
-                var results = _context.Eventos.ToList();
+                var results = await _context.Eventos.ToListAsync();
                 return Ok(results);
             }
             catch (Exception)
@@ -70,12 +71,12 @@ namespace ProAgil.WebApi.Controllers
             // .ToArray();
         }
 
-        [HttpGet("Evento/{id}")]
-        public IActionResult GetEvento(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var result = _context.Eventos.FirstOrDefault(x => x.EventoId == id);
+                var result = await _context.Eventos.FirstOrDefaultAsync(x => x.EventoId == id);
                 return Ok(result);
             }
             catch (Exception)
