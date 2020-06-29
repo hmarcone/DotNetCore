@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProAgil.WebApi.Data;
 using ProAgil.WebApi.Model;
 
 namespace ProAgil.WebApi.Controllers
@@ -18,9 +20,11 @@ namespace ProAgil.WebApi.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ProAgilContext _context;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ProAgilContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
@@ -38,40 +42,60 @@ namespace ProAgil.WebApi.Controllers
         }
 
         [HttpGet("Evento")]
-        public IEnumerable<Evento> GetEvento()
+        public ActionResult<IEnumerable<Evento>> GetEvento()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Evento
+            try
             {
-                EventoId = index,
-                Tema = $"Angular e .Net Core {index}",
-                Local = $"Belo Horizonte {index}",
-                Lote = $"{index}º Lote",
-                QtdPessoas = 249 + index,
-                DataEvento = DateTime.Now.AddDays(index).ToString("dd/MM/yyyy")
-                // Date = DateTime.Now.AddDays(index),
-                // TemperatureC = rng.Next(-20, 55),
-                // Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                var results = _context.Eventos.ToList();
+                return Ok(results);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Banco de dados falhou!");
+            }
+            //ToDo: retirar depois
+            // var rng = new Random();
+            // return Enumerable.Range(1, 5).Select(index => new Evento
+            // {
+            //     EventoId = index,
+            //     Tema = $"Angular e .Net Core {index}",
+            //     Local = $"Belo Horizonte {index}",
+            //     Lote = $"{index}º Lote",
+            //     QtdPessoas = 249 + index,
+            //     DataEvento = DateTime.Now.AddDays(index).ToString("dd/MM/yyyy")
+            //     // Date = DateTime.Now.AddDays(index),
+            //     // TemperatureC = rng.Next(-20, 55),
+            //     // Summary = Summaries[rng.Next(Summaries.Length)]
+            // })
+            // .ToArray();
         }
 
         [HttpGet("Evento/{id}")]
-        public IEnumerable<Evento> GetEvento(int id)
+        public IActionResult GetEvento(int id)
         {
-            var rng = new Random();
-            var listEvento =  Enumerable.Range(1, 5).Select(index => new Evento
+            try
             {
-                EventoId = index,
-                Tema = $"Angular e .Net Core {index}",
-                Local = $"Belo Horizonte {index}",
-                Lote = $"{index}º Lote",
-                QtdPessoas = 249 + index,
-                DataEvento = DateTime.Now.AddDays(index).ToString("dd/MM/yyyy")
-            })
-            .ToArray();
+                var result = _context.Eventos.FirstOrDefault(x => x.EventoId == id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Banco de dados falhou!");
+            }
 
-            return listEvento.Where(x => x.EventoId == id);
+            //var rng = new Random();
+            //var listEvento = Enumerable.Range(1, 5).Select(index => new Evento
+            //{
+            //    EventoId = index,
+            //    Tema = $"Angular e .Net Core {index}",
+            //    Local = $"Belo Horizonte {index}",
+            //    Lote = $"{index}º Lote",
+            //    QtdPessoas = 249 + index,
+            //    DataEvento = DateTime.Now.AddDays(index).ToString("dd/MM/yyyy")
+            //})
+            //.ToArray();
+
+            //return listEvento.Where(x => x.EventoId == id);
         }
 
     }
