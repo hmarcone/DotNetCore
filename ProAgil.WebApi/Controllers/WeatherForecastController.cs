@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProAgil.WebApi.Model;
 
 namespace ProAgil.WebApi.Controllers
 {
@@ -35,5 +36,43 @@ namespace ProAgil.WebApi.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("Evento")]
+        public IEnumerable<Evento> GetEvento()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new Evento
+            {
+                EventoId = index,
+                Tema = $"Angular e .Net Core {index}",
+                Local = $"Belo Horizonte {index}",
+                Lote = $"{index}º Lote",
+                QtdPessoas = 249 + index,
+                DataEvento = DateTime.Now.AddDays(index).ToString("dd/MM/yyyy")
+                // Date = DateTime.Now.AddDays(index),
+                // TemperatureC = rng.Next(-20, 55),
+                // Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
+
+        [HttpGet("Evento/{id}")]
+        public IEnumerable<Evento> GetEvento(int id)
+        {
+            var rng = new Random();
+            var listEvento =  Enumerable.Range(1, 5).Select(index => new Evento
+            {
+                EventoId = index,
+                Tema = $"Angular e .Net Core {index}",
+                Local = $"Belo Horizonte {index}",
+                Lote = $"{index}º Lote",
+                QtdPessoas = 249 + index,
+                DataEvento = DateTime.Now.AddDays(index).ToString("dd/MM/yyyy")
+            })
+            .ToArray();
+
+            return listEvento.Where(x => x.EventoId == id);
+        }
+
     }
 }
