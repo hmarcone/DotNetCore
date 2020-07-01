@@ -2,10 +2,8 @@
 
 namespace ProAgil.Domain
 {
-    public class Palestrante
+    public class Palestrante: EntityBase
     {
-        public int Id { get; private set; }
-        public string Nome { get; private set; }
         public string MiniCurriculo { get; private set; }
         public string ImagemURL { get; private set; }
         public string Telefone { get; private set; }
