@@ -1,0 +1,16 @@
+Adicionando referencias entre projetos
+
+dotnet add ProAgil.WebApi/ProAgil.WebApi.csproj reference ProAgil.Domain/ProAgil.Domain.csproj
+dotnet add ProAgil.WebApi/ProAgil.WebApi.csproj reference ProAgil.Repository\ProAgil.Repository.csproj
+
+Adicionando projetos a solution
+
+dotnet sln ProAgil.sln add ProAgil.Repository\ProAgil.Repository.csproj ProAgil.Domain\ProAgil.Domain.csproj
+
+Criando migrations
+
+dotnet ef --startup-project ../ProAgil.WebApi migrations add init
+
+Criando o banco de dados
+
+dotnet ef --startup-project ../ProAgil.WebApi database update
