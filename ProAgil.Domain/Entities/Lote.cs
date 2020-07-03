@@ -5,10 +5,10 @@ namespace ProAgil.Domain.Entities
 {
     public class Lote : Entity
     {
-        public decimal Preco { get; private set; }
-        public DateTime? DataInicio{ get; private set; }
-        public DateTime? DataFim { get; private set; }
-        public int Quantidade { get; private set; }
+        public decimal Preco { get; set; }
+        public DateTime? DataInicio{ get;  set; }
+        public DateTime? DataFim { get; set; }
+        public int Quantidade { get; set; }
         public int EventoId { get; private set; }
         public Evento Evento { get; }
     }

@@ -6,14 +6,14 @@ namespace ProAgil.Domain.Entities
 {
     public class Evento: Entity
     {
-        public string Local { get; private set; }
-        public DateTime DataEvento { get; private set; }
-        public int QtdPessoas { get; private set; }
-        public string ImagemURL { get; private set; }
-        public string Telefone { get; private set; }
-        public string Email { get; private set; }
-        public List<Lote> Lotes { get; private set; }
-        public List<RedeSocial> RedesSociais { get; private set; }
-        public List<PalestranteEvento> PalestrantesEventos { get; private set; }
+        public string Local { get; set; }
+        public DateTime DataEvento { get; set; }
+        public int QtdPessoas { get; set; }
+        public string ImagemURL { get; set; }
+        public string Telefone { get; set; }
+        public string Email { get;  set; }
+        public List<Lote> Lotes { get; set; }
+        public List<RedeSocial> RedesSociais { get; set; }
+        public List<PalestranteEvento> PalestrantesEventos { get; set; }
     }
 }
