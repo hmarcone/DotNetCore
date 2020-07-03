@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using ProAgil.Domain.Core;
+using System.Collections.Generic;
 
-namespace ProAgil.Domain
+namespace ProAgil.Domain.Entities
 {
-    public class Palestrante: EntityBase
+    public class Palestrante: Entity
     {
         public string MiniCurriculo { get; private set; }
         public string ImagemURL { get; private set; }

@@ -1,9 +1,10 @@
+using ProAgil.Domain.Core;
 using System;
 using System.Collections.Generic;
 
-namespace ProAgil.Domain
+namespace ProAgil.Domain.Entities
 {
-    public class Evento: EntityBase
+    public class Evento: Entity
     {
         public string Local { get; private set; }
         public DateTime DataEvento { get; private set; }

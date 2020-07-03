@@ -1,4 +1,4 @@
-﻿using ProAgil.Domain;
+﻿using ProAgil.Domain.Entities;
 using System.Threading.Tasks;
 
 namespace ProAgil.Repository

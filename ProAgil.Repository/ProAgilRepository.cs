@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProAgil.Domain;
-using ProAgil.Respository;
-using System;
-using System.Collections.Generic;
+using ProAgil.Domain.Entities;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProAgil.Repository

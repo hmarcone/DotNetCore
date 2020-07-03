@@ -1,10 +1,13 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProAgil.Respository;
+using ProAgil.Domain.Entities;
+using ProAgil.Infrastructure.DbModels;
+using ProAgil.Repository;
 
 namespace ProAgil.WebApi
 {
@@ -22,7 +25,16 @@ namespace ProAgil.WebApi
         {
             services.AddControllers();
             services.AddDbContext<ProAgilContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDbContext<ProAgilContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddScoped<IProAgilRepository, ProAgilRepository>();
+            services.AddAutoMapper();
+            //AutoMapper.Mapper.Initialize(cfg => {
+            //    cfg.AllowNullDestinationValues = true;
+            //    cfg.CreateMap<EventoModel, Evento>(MemberList.None);
+            //    cfg.CreateMap<Evento, EventoModel>(MemberList.None);
+            //});
+            //ToDo: retirar depois
+            //services.AddSingleton(Mapper.Configuration);
+            //services.AddSingleton<IConfigurationProvider>(AutoMapperConfig.RegisterMappings());
             services.AddCors();
         }
 

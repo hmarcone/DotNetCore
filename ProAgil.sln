@@ -5,9 +5,13 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProAgil.WebApi", "ProAgil.WebApi\ProAgil.WebApi.csproj", "{8BAB52CD-E542-4B27-9246-92AEBE8794BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProAgil.Repository", "ProAgil.Repository\ProAgil.Repository.csproj", "{7CA6E5CB-291B-4841-A97A-7BACCE037B62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProAgil.Repository", "ProAgil.Repository\ProAgil.Repository.csproj", "{7CA6E5CB-291B-4841-A97A-7BACCE037B62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProAgil.Domain", "ProAgil.Domain\ProAgil.Domain.csproj", "{F77E1C8D-B9CA-4C81-8E66-4FAA2A1D9D9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProAgil.Domain", "ProAgil.Domain\ProAgil.Domain.csproj", "{F77E1C8D-B9CA-4C81-8E66-4FAA2A1D9D9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProAgil.Domain.Core", "ProAgil.Domain.Core\ProAgil.Domain.Core.csproj", "{8F726ACD-E67B-4C01-9B01-D8AE4C9FA9FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProAgil.Infrastructure", "ProAgil.Infrastructure\ProAgil.Infrastructure.csproj", "{AED05A9C-050C-4154-B395-44BF7E011B00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{F77E1C8D-B9CA-4C81-8E66-4FAA2A1D9D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F77E1C8D-B9CA-4C81-8E66-4FAA2A1D9D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F77E1C8D-B9CA-4C81-8E66-4FAA2A1D9D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F726ACD-E67B-4C01-9B01-D8AE4C9FA9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F726ACD-E67B-4C01-9B01-D8AE4C9FA9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F726ACD-E67B-4C01-9B01-D8AE4C9FA9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F726ACD-E67B-4C01-9B01-D8AE4C9FA9FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED05A9C-050C-4154-B395-44BF7E011B00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED05A9C-050C-4154-B395-44BF7E011B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED05A9C-050C-4154-B395-44BF7E011B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED05A9C-050C-4154-B395-44BF7E011B00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

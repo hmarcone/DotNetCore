@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ProAgil.Domain.Core\ProAgil.Domain.Core.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using ProAgil.Respository;
+using ProAgil.Repository;
 using ProAgil.WebApi.Model;
 
 namespace ProAgil.WebApi.Controllers
