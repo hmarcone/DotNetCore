@@ -12,8 +12,11 @@
   <thead class="thead-light">
     <tr>
       <th class="text-center">
-        <button class="btn btn-outline-primary" (click)="alternarImagem()">
+        <!-- <button class="btn btn-outline-primary" (click)="alternarImagem()">
           Mostrar Imagem
+        </button> -->
+        <button class="btn btn-outline-primary" (click)="alternarImagem()">
+          <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
         </button>
       </th>
       <th>#</th>
@@ -25,34 +28,38 @@
       <th>Opções</th>
     </tr>
   </thead>
-  <tbody *ngIf="eventos">
+  <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let evento of eventosFiltrados">
       <td>
         <img *ngIf="mostrarImagem" src="http://localhost:5000/img/{{evento.imagemURL}}" alt=""
           [style.width.px]="imagemLargura"
           [style.margin.px]="imagemMargem">
-        <!-- {{evento.imagemUrl}} -->
+        <!-- {{evento.imagemURL}} -->
       </td>
-      <td>{{evento.eventoId}}</td>
+      <td>{{evento.id}}</td>
       <td>{{evento.nome}}</td>
       <td>{{evento.local}}</td>
       <td>{{evento.dataEvento}}</td>
       <td>{{evento.qtdPessoas}}</td>
       <td>
-        <!-- <div *ngIf="!evento.lote.length">
+        <div *ngIf="!evento.lotes.length">
           Não Informado
-        </div> -->
-        <!-- <div *ngIf="evento.lote.length"> -->
-          {{evento.lote | uppercase}}
-        <!-- </div>         -->
+        </div>
+        <div *ngIf="evento.lotes.length">
+          {{evento.lotes[0].nome | uppercase}}
+        </div>        
       </td>
       <td>
-        <button class="btn btn-success"></button>
-        <button class="btn btn-danger"></button>
+          <button class="btn btn-sm btn-success" tooltip="Editar" (click)="editarEvento(evento, template)">
+            <i class="fa fa-edit"></i>
+          </button>&nbsp;
+          <button class="btn btn-sm btn-danger" tooltip="Excluir" (click)="excluirEvento(evento, confirm)">
+            <i class="fa fa-eraser"></i>
+          </button>
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="!eventos.length">
+  <tfoot *ngIf="!eventos">
     <tr>
       <td colspan="7" class="text-center">
         <h4>

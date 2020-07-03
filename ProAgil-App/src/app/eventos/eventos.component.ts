@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventoService } from '../_services/evento.service';
+import { Evento } from '../_models/Evento';
 
 import { from } from 'rxjs';
 @Component({
@@ -20,9 +21,9 @@ export class EventosComponent implements OnInit {
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-  eventosFiltrados: any = [];
+  eventosFiltrados: Evento[];
 
-  eventos: any = [];
+  eventos: Evento[];
   imagemLargura = 50;
   imagemAltura = 2;
   mostrarImagem = false;
@@ -33,11 +34,18 @@ export class EventosComponent implements OnInit {
     this.getEventos();
   }
 
-  filtrarEventos(filtrarPor: string): any {
+  // filtrarEventos(filtrarPor: string): Evento[] {
+  //   filtrarPor = filtrarPor.toLocaleLowerCase();
+  //   return this.eventos.filter(
+  //     evento => evento.nome.toLocaleLowerCase().indexOf(filtrarPor) !==  -1
+  //   );
+  // }
+
+  filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.eventos.filter(
-      evento => evento.nome.toLocaleLowerCase().indexOf(filtrarPor) !==  -1
-    );
+    return this.eventos.filter(evento => { 
+        return evento.nome.toLocaleLowerCase().includes(filtrarPor)
+    });
   }
 
   alternarImagem(){
@@ -45,9 +53,10 @@ export class EventosComponent implements OnInit {
   }
 
   getEventos() {
-    this.eventoService.getEvento().subscribe(response => {
-      this.eventos = response;
-      console.log(this.eventos);
+    this.eventoService.getAllEvento().subscribe(
+    (_eventos: Evento[]) => {
+      this.eventos = _eventos;
+      console.log(_eventos);
     }, error => {
         console.log(error);
     });
