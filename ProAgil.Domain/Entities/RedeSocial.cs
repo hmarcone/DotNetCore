@@ -4,7 +4,7 @@ namespace ProAgil.Domain.Entities
 {
     public class RedeSocial : Entity
     {
-        public string URL { get; private set; }
+        public string URL { get; set; }
         public int? EventoId { get; private set; }
         public Evento Evento { get; }
         public int? PalestranteId { get; private set; }

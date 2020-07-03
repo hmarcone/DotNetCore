@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { EventoService } from '../_services/evento.service';
 
+import { from } from 'rxjs';
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
@@ -17,7 +18,7 @@ export class EventosComponent implements OnInit {
   set filtroLista(value: string){
     this._filtroLista = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
-  } 
+  }
 
   eventosFiltrados: any = [];
 
@@ -26,7 +27,7 @@ export class EventosComponent implements OnInit {
   imagemAltura = 2;
   mostrarImagem = false;
 
-  constructor(private http: HttpClient) {  }
+  constructor(private eventoService: EventoService) {  }
 
   ngOnInit() {
     this.getEventos();
@@ -35,7 +36,7 @@ export class EventosComponent implements OnInit {
   filtrarEventos(filtrarPor: string): any {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
-      evento => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !==  -1
+      evento => evento.nome.toLocaleLowerCase().indexOf(filtrarPor) !==  -1
     );
   }
 
@@ -44,7 +45,7 @@ export class EventosComponent implements OnInit {
   }
 
   getEventos() {
-    this.http.get('http://localhost:5000/WeatherForecast').subscribe(response => { 
+    this.eventoService.getEvento().subscribe(response => {
       this.eventos = response;
       console.log(this.eventos);
     }, error => {
