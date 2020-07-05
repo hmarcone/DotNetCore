@@ -1,11 +1,11 @@
 # ProAgil
 
-## Projeto para realizar a gestão de Eventos
+## Projeto para realizar gestão de Eventos
 
 - [Latest .NET Core 3.1 release]
-- Angula 9
 - AutoMapper
 - Banco SQLite
+- Angula 10
 
 ## Build & Run
 
