@@ -4,6 +4,7 @@ import { HttpClientModule  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -32,6 +33,7 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
       TooltipModule.forRoot(),
       ModalModule.forRoot(),
       TabsModule.forRoot(),
+      BrowserAnimationsModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule
