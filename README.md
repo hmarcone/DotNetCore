@@ -3,9 +3,10 @@
 ## Projeto para realizar gestão de Eventos
 
 - [Latest .NET Core 3.1 release]
+- EF Core
 - AutoMapper
 - Banco SQLite
-- Angula 10
+- Angula 10 (NGX Bootstrap, Reactive Forms e Observable)
 
 ## Build & Run
 
