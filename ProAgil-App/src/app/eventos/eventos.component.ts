@@ -1,11 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { EventoService } from '../_services/evento.service';
 import { Evento } from '../_models/Evento';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -18,6 +19,7 @@ export class EventosComponent implements OnInit {
 
   dataEvento: string;
   eventos: Evento[];
+  evento: Evento;
   imagemLargura = 50;
   imagemAltura = 2;
   mostrarImagem = false;
@@ -27,14 +29,18 @@ export class EventosComponent implements OnInit {
   file: File;
   _filtroLista: string;
 
+  dataAtual: string;
+
   constructor(
     private eventoService: EventoService
   , private modalService: BsModalService
   , private fb: FormBuilder
-  ,private localeservice: BsLocaleService
-  ) { 
+  , private localeservice: BsLocaleService
+  , private toastr: ToastrService
+  )
+  {
     this.localeservice.use('pt-br');
-   }
+  }
 
   get filtroLista(): string{
     return this._filtroLista;
@@ -52,7 +58,14 @@ export class EventosComponent implements OnInit {
     this.openModal(template);
   }
 
+  // excluirEvento(evento: Evento, template: any) {
+  //   this.openModal(template);
+  //   this.evento = evento;
+  //   this.bodyDeletarEvento = `Tem certeza que deseja excluir o Evento: ${evento.nome}, Código: ${evento.id}`;
+  // }
+
   openModal(template: any){
+    this.registerForm.reset();
     template.show(template);
   }
 
@@ -61,19 +74,19 @@ export class EventosComponent implements OnInit {
     this.getEventos();
   }
 
-  // filtrarEventos(filtrarPor: string): Evento[] {
-  //   filtrarPor = filtrarPor.toLocaleLowerCase();
-  //   return this.eventos.filter(
-  //     evento => evento.nome.toLocaleLowerCase().indexOf(filtrarPor) !==  -1
-  //   );
-  // }
-
   filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.eventos.filter(evento => { 
-        return evento.nome.toLocaleLowerCase().includes(filtrarPor)
-    });
+    return this.eventos.filter(
+      evento => evento.nome.toLocaleLowerCase().indexOf(filtrarPor) !==  -1
+    );
   }
+
+  // filtrarEventos(filtrarPor: string): Evento[] {
+  //   filtrarPor = filtrarPor.toLocaleLowerCase();
+  //   return this.eventos.filter(evento => { 
+  //       return evento.nome.toLocaleLowerCase().includes(filtrarPor)
+  //   });
+  // }
 
   validation() {
     this.registerForm = this.fb.group({
@@ -96,8 +109,22 @@ export class EventosComponent implements OnInit {
     }
   }
 
-  salvarAlteracao(){
-
+  salvarAlteracao(template: any){
+    if (this.registerForm.valid) {
+        this.evento = Object.assign({}, this.registerForm.value);
+        console.log(template);
+        this.eventoService.postEvento(this.evento).subscribe(
+          (novoEvento: Evento) => {
+            console.log(novoEvento);
+            template.hide();
+            this.getEventos();
+            this.toastr.success('Inserido com Sucesso!');
+          }, error => {
+            console.log(error);
+            this.toastr.error(`Erro ao Inserir: ${error}`);
+          }
+        );
+    }
   }
 
   alternarImagem(){
@@ -105,12 +132,16 @@ export class EventosComponent implements OnInit {
   }
 
   getEventos() {
+    this.dataAtual = new Date().getMilliseconds().toString();
+
     this.eventoService.getAllEvento().subscribe(
     (_eventos: Evento[]) => {
       this.eventos = _eventos;
+      this.eventosFiltrados = this.eventos;
       console.log(_eventos);
     }, error => {
-        console.log(error);
+      this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
+      console.log(error);
     });
   }
 }
