@@ -2,8 +2,8 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { EventoService } from '../_services/evento.service';
 import { Evento } from '../_models/Evento';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Template } from '@angular/compiler/src/render3/r3_ast';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {  ptBrLocale } from 'ngx-bootstrap/locale';
 
 @Component({
   selector: 'app-eventos',
@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class EventosComponent implements OnInit {
 
+  dataEvento: string;
   eventos: Evento[];
   imagemLargura = 50;
   imagemAltura = 2;
@@ -19,6 +20,7 @@ export class EventosComponent implements OnInit {
   modalRef: BsModalRef;
   registerForm: FormGroup;
 
+  file: File;
   _filtroLista: string;
 
   constructor(
@@ -62,16 +64,23 @@ export class EventosComponent implements OnInit {
 
   validation() {
     this.registerForm = new FormGroup({
-      local: new FormControl('', ),
+      local: new FormControl('', Validators.required),
       dataEvento: new FormControl('', Validators.required),
       nome: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]),
-      qtdPessoas: new FormControl('',
-        [Validators.required, Validators.maxLength(120000)]),
+      qtdPessoas: new FormControl('', [Validators.required, Validators.max(120000)]),
       imagemURL: new FormControl('', Validators.required),
       telefone: new FormControl('', Validators.required),
-      email: new FormControl('', 
-        [Validators.required, Validators.email])
+      email: new FormControl('', [Validators.required, Validators.email])
     });
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      this.file = event.target.files;
+      console.log(this.file);
+    }
   }
 
   salvarAlteracao(){
