@@ -21,8 +21,8 @@ export class EventosComponent implements OnInit {
   imagemLargura = 50;
   imagemAltura = 2;
   mostrarImagem = false;
-  modalRef: BsModalRef;
   registerForm: FormGroup;
+  modoSalvar = 'post';
 
   file: File;
   _filtroLista: string;
@@ -47,8 +47,13 @@ export class EventosComponent implements OnInit {
 
   eventosFiltrados: Evento[];
 
-  openModal(template: TemplateRef<any>){
-    this.modalRef = this.modalService.show(template);
+  novoEvento(template: any) {
+    this.modoSalvar = 'post';
+    this.openModal(template);
+  }
+
+  openModal(template: any){
+    template.show(template);
   }
 
   ngOnInit() {
