@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProAgil.Domain.Entities;
 using ProAgil.Infrastructure.DbModels;
 using ProAgil.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,10 +103,12 @@ namespace ProAgil.WebApi.Controllers
         }
 
         [HttpPut("{EventoId}")]
-        public async Task<IActionResult> Put(int EventoId, Evento model)
+        public async Task<IActionResult> Put(int EventoId, EventoModel model)
         {
             try
             {
+                if (!ModelState.IsValid) return BadRequest();
+
                 var evento = await _repo.GetEventoAsyncById(EventoId, false);
                 if (evento == null) return NotFound();
 
@@ -128,6 +131,9 @@ namespace ProAgil.WebApi.Controllers
 
                 //_mapper.Map(model, evento);
 
+                //ToDo: retirar depois que arrumar o mapeamento
+                MapModelToEntity(model, evento);
+
                 _repo.Update(evento);
 
                 if (await _repo.SaveChangesAsync())
@@ -142,6 +148,17 @@ namespace ProAgil.WebApi.Controllers
             }
 
             return BadRequest();
+        }
+
+        private void MapModelToEntity(EventoModel model, Evento evento)
+        {
+            evento.Nome = model.Nome;
+            evento.Local = model.Local;
+            evento.ImagemURL = model.ImagemURL;
+            evento.DataEvento = Convert.ToDateTime(model.DataEvento);
+            evento.Email = model.Email;
+            evento.Telefone = model.Telefone;
+            evento.QtdPessoas = model.QtdPessoas;
         }
 
         [HttpDelete("{EventoId}")]

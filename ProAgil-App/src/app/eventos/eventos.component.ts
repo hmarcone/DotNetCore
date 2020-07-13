@@ -53,6 +53,14 @@ export class EventosComponent implements OnInit {
 
   eventosFiltrados: Evento[];
 
+  editarEvento(evento: Evento, template: any){
+    console.log(evento);
+    this.modoSalvar = 'put';
+    this.openModal(template);
+    this.evento = evento;
+    this.registerForm.patchValue(evento);
+  }
+
   novoEvento(template: any) {
     this.modoSalvar = 'post';
     this.openModal(template);
@@ -110,7 +118,9 @@ export class EventosComponent implements OnInit {
   }
 
   salvarAlteracao(template: any){
+    console.log(this.modoSalvar);
     if (this.registerForm.valid) {
+      if (this.modoSalvar === 'post'){
         this.evento = Object.assign({}, this.registerForm.value);
         console.log(template);
         this.eventoService.postEvento(this.evento).subscribe(
@@ -124,6 +134,21 @@ export class EventosComponent implements OnInit {
             this.toastr.error(`Erro ao Inserir: ${error}`);
           }
         );
+      } else {
+        this.evento = Object.assign({id: this.evento.id}, this.registerForm.value);
+        //console.log(template);
+        this.eventoService.putEvento(this.evento).subscribe(
+          () => {
+            //console.log(novoEvento);
+            template.hide();
+            this.getEventos();
+            this.toastr.success('Inserido com Sucesso!');
+          }, error => {
+            console.log(error);
+            this.toastr.error(`Erro ao Inserir: ${error}`);
+          }
+        );
+      }
     }
   }
 

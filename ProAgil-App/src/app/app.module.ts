@@ -15,6 +15,7 @@ import { EventoService } from './_services/evento.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
+//import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
 import { NavComponent } from './nav/nav.component';
 
 import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
@@ -24,6 +25,7 @@ import { DateTimeFormatPipePipe } from './_helps/DateTimeFormatPipe.pipe';
    declarations: [
       AppComponent,
       EventosComponent,
+      //EventoEditComponent,
       NavComponent,
       DateTimeFormatPipePipe
    ],

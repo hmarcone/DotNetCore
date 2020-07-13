@@ -61,7 +61,7 @@
       <td>
         <div class="btn-group">
           <button class="btn btn-sm btn-success" 
-          tooltip="Editar" (click)="openModal(template)">
+          tooltip="Editar" (click)="editarEvento(evento, template)">
           <i class="fa fa-edit"></i>
         </button>&nbsp;
         <button class="btn btn-sm btn-danger" tooltip="Excluir" (click)="excluirEvento(evento, confirm)">
@@ -155,17 +155,24 @@
               <table>
                 <tr>
                   <td>
-                    <button class="btn btn-success" (click)="file.click()">Enviar Imagem</button>
+                    <input type="text" 
+                    [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors 
+                      && registerForm.get('imagemURL').touched}"
+                    class="form-control" formControlName="imagemURL" placeholder="">
+                    <div *ngIf="registerForm.get('imagemURL').hasError('required') && registerForm.get('imagemURL').touched" class="invalid-feedback">
+                      Imagem é obrigatório.
+                    </div>      
+                    <!-- <button class="btn btn-success" (click)="file.click()">Enviar Imagem</button>
                     <input type="file" #file [ngClass]="{'is-invalid': registerForm.get('imagemURL').errors 
                       && registerForm.get('imagemURL').touched}" (change)="onFileChange($event)" class="form-control is-invalid"
-                      formControlName="imagemURL" placeholder="" style="display: none">
+                      formControlName="imagemURL" placeholder="" style="display: none"> -->
                   </td>
                 </tr>
               </table>
               <!-- <input type="text" class="form-control is-invalid" formControlName="imagemURL" placeholder=""> -->
-              <div *ngIf="registerForm.get('imagemURL').hasError('required') && registerForm.get('imagemURL').touched" class="invalid-feedback">
+              <!-- <div *ngIf="registerForm.get('imagemURL').hasError('required') && registerForm.get('imagemURL').touched" class="invalid-feedback">
                 Imagem é obrigatório.
-              </div>
+              </div> -->
             </div>
           </div>  
           <div class="form-row">

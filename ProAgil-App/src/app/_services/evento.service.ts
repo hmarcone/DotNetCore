@@ -7,7 +7,8 @@ import { Evento } from '../_models/Evento';
   providedIn: 'root'
 })
 export class EventoService {
-  baseURL = 'https://localhost:44366/api/v1/Evento';// 'http://localhost:44366/api/v1/evento';
+  //baseURL = 'http://localhost:5000/api/v1/Evento'; correta
+  baseURL = 'https://localhost:44366/api/v1/Evento';
 
   constructor(private http: HttpClient) { }
 
@@ -24,11 +25,23 @@ export class EventoService {
     return this.http.get<Evento[]>('${this.baseURL}/${id}');
   }
 
+  postUpload(file: File, name: string) {
+    const fileToUplaod = <File>file[0];
+    const formData = new FormData();
+    formData.append('file', fileToUplaod, name);
+
+    return this.http.post(`${this.baseURL}/upload`, formData);
+  }
+
   postEvento(evento: Evento) {
     return this.http.post(this.baseURL, evento);
   }
 
   putEvento(evento: Evento) {
+    console.log('put');
+    console.log(evento.nome);
+    console.log(evento.id);
+    console.log(`${this.baseURL}/${evento.id}`);
     return this.http.put(`${this.baseURL}/${evento.id}`, evento);
   }
 

@@ -9,7 +9,7 @@ namespace ProAgil.Infrastructure.DbModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O Tema deve ser Preeenchido")]
-        public string Tema { get; set; }
+        public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Local é entre 3 e 100 Caracters")]
