@@ -16,19 +16,23 @@ defineLocale('pt-br', ptBrLocale);
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
-
-  dataEvento: string;
+  eventosFiltrados: Evento[];
   eventos: Evento[];
+
   evento: Evento;
+  modoSalvar = 'post';
+
   imagemLargura = 50;
   imagemAltura = 2;
   mostrarImagem = false;
   registerForm: FormGroup;
-  modoSalvar = 'post';
+  bodyDeletarEvento = '';
 
-  file: File;
   _filtroLista: string;
 
+  file: File;
+
+  dataEvento: string;
   dataAtual: string;
 
   constructor(
@@ -51,8 +55,6 @@ export class EventosComponent implements OnInit {
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-  eventosFiltrados: Evento[];
-
   editarEvento(evento: Evento, template: any){
     console.log(evento);
     this.modoSalvar = 'put';
@@ -66,11 +68,23 @@ export class EventosComponent implements OnInit {
     this.openModal(template);
   }
 
-  // excluirEvento(evento: Evento, template: any) {
-  //   this.openModal(template);
-  //   this.evento = evento;
-  //   this.bodyDeletarEvento = `Tem certeza que deseja excluir o Evento: ${evento.nome}, Código: ${evento.id}`;
-  // }
+  excluirEvento(evento: Evento, template: any) {
+    //template.show();
+    this.openModal(template);
+    this.evento = evento;
+    this.bodyDeletarEvento = `Tem certeza que deseja excluir o Evento: ${evento.nome}, Código: ${evento.id}`;
+  }
+
+  confirmeDelete(template: any) {
+    this.eventoService.deleteEvento(this.evento.id).subscribe(
+      () => {
+          template.hide();
+          this.getEventos();
+        }, error => {
+          console.log(error);
+        }
+    );
+  }
 
   openModal(template: any){
     this.registerForm.reset();
