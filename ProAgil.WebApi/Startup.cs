@@ -27,7 +27,10 @@ namespace ProAgil.WebApi
             services.AddControllers().AddNewtonsoftJson(); //usa o NewtonsoftJson 
             services.AddDbContext<ProAgilContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IProAgilRepository, ProAgilRepository>();
-            services.AddAutoMapper();
+
+            //Versão 4.01 do AutoMapper.Extensions.Microsoft.DependencyInjection
+            services.AddAutoMapper();  //services.AddAutoMapper(typeof(Startup)); versão 8.0 do AutoMapper.Extensions.Microsoft.DependencyInjection
+
             //AutoMapper.Mapper.Initialize(cfg => {
             //    cfg.AllowNullDestinationValues = true;
             //    cfg.CreateMap<EventoModel, Evento>(MemberList.None);

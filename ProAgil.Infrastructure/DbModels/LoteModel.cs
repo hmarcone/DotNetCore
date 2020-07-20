@@ -8,9 +8,12 @@ namespace ProAgil.Infrastructure.DbModels
 
         [Required]
         public string Nome { get; set; }
+
         [Required]
         public decimal Preco { get; set; }
+
         public string DataInicio { get; set; }
+
         public string DataFim { get; set; }
 
         [Range(2, 120000)]
