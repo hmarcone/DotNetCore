@@ -4,10 +4,12 @@ namespace ProAgil.Infrastructure.DbModels
 {
     public class RedeSocialModel
     {
-        [Required(ErrorMessage = "O Campo {0} é Obrigatório")]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Nome { get; set; }
 
-		[Required(ErrorMessage = "O Campo {0} é Obrigatório")]
+		[Required(ErrorMessage = "O campo {0} é obrigatório")]
 		public string URL { get; set; }
 	}
 }

@@ -17,6 +17,13 @@ namespace ProAgil.WebApi.Helpers
 				})
 				.ReverseMap();
 
+			//ToDo: forma dificil de resolver a questão do palestrantes eventos
+			//CreateMap<EventoModel, Evento>()
+			//	.ForMember(dest => dest.PalestrantesEventos.Select(x => x.Palestrante).ToList(), opt =>
+			//	{
+			//		opt.MapFrom(src => src.Palestrantes);
+			//	});
+
 			CreateMap<Palestrante, PalestranteModel>()
 				.ForMember(dest => dest.Eventos, opt =>
 				{

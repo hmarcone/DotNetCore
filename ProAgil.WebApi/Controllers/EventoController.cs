@@ -30,7 +30,7 @@ namespace ProAgil.WebApi.Controllers
 			{
 				var eventos = await _repo.GetAllEventoAsync(true);
 
-				var results = _mapper.Map<IEnumerable<EventoModel>>(eventos);
+				var results = _mapper.Map<EventoModel[]>(eventos);
 
 				return Ok(results);
 			}
@@ -63,38 +63,40 @@ namespace ProAgil.WebApi.Controllers
 		{
 			try
 			{
-				//var eventos = await _repo.GetAllEventoAsyncByTema(tema, true);
-				var results = await _repo.GetAllEventoAsyncByTema(tema, true);
+				var eventos = await _repo.GetAllEventoAsyncByTema(tema, true);
 
-				//var results = _mapper.Map<EventoModel[]>(eventos);
+				var results = _mapper.Map<EventoModel[]>(eventos);
 
 				return Ok(results);
 			}
-			catch (System.Exception)
+			catch (Exception ex)
 			{
-				return StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou - Erro: {ex.Message}");
 			}
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Post(Evento model)
+		public async Task<IActionResult> Post(EventoModel model)
 		{
+			//ToDo: sem a anotação no inicio da api apicontroller tenho que avisar para o metodo que o 
+			//envio dos dados é via corpo com o frombody e preciso validar o model
+			//if (!ModelState.IsValid)
+			//	return this.StatusCode(StatusCodes.Status400BadRequest, ModelState);
+
 			try
 			{
-				//var evento = _mapper.Map<Evento>(model);
+				var evento = _mapper.Map<Evento>(model);
 
-				_repo.Add(model);
+				_repo.Add(evento);
 
 				if (await _repo.SaveChangesAsync())
 				{
-					return Created($"/api/evento/{model.Id}", model);
-					//return Created($"/api/evento/{model.Id}", _mapper.Map<EventoModel>(model));
+					return Created($"/api/evento/{model.Id}", _mapper.Map<EventoModel>(evento));
 				}
 			}
-			catch (System.Exception ex)
+			catch (Exception ex)
 			{
-				return this.StatusCode(StatusCodes.Status500InternalServerError,
-					$"Banco Dados Falhou {ex.Message}");
+				return StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
 			}
 
 			return BadRequest();
@@ -105,7 +107,7 @@ namespace ProAgil.WebApi.Controllers
 		{
 			try
 			{
-				if (!ModelState.IsValid) return BadRequest();
+				//if (!ModelState.IsValid) return BadRequest();
 
 				var evento = await _repo.GetEventoAsyncById(EventoId, false);
 				if (evento == null) return NotFound();
@@ -127,17 +129,17 @@ namespace ProAgil.WebApi.Controllers
 				//if (lotes.Length > 0) _repo.DeleteRange(lotes);
 				//if (redesSociais.Length > 0) _repo.DeleteRange(redesSociais);
 
-				//_mapper.Map(model, evento);
+				_mapper.Map(model, evento);
 
 				//ToDo: retirar depois que arrumar o mapeamento
-				MapModelToEntity(model, evento);
+				//MapModelToEntity(model, evento);
 
 				_repo.Update(evento);
 
 				if (await _repo.SaveChangesAsync())
 				{
-					return Created($"/api/evento/{model.Id}", model);
-					//return Created($"/api/evento/{model.Id}", _mapper.Map<EventoModel>(evento));
+					//return Created($"/api/evento/{model.Id}", model);
+					return Created($"/api/evento/{model.Id}", _mapper.Map<EventoModel>(evento));
 				}
 			}
 			catch (System.Exception ex)

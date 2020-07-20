@@ -75,6 +75,7 @@ namespace ProAgil.Repository
 
 			return await query.ToArrayAsync();
 		}
+
 		public async Task<Evento> GetEventoAsyncById(int eventoId, bool includePalestrantes)
 		{
 			IQueryable<Evento> query = _context.Eventos
