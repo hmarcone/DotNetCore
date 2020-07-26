@@ -88,7 +88,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ProAgil-App"
+    }
+  },
+  "defaultProject": "ProAgil-App",
+  "cli": {
+    "analytics": false
+  }
 }

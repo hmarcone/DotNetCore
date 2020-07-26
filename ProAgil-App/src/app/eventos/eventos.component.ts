@@ -15,6 +15,7 @@ defineLocale('pt-br', ptBrLocale);
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.css']
 })
+
 export class EventosComponent implements OnInit {
   eventosFiltrados: Evento[];
   eventos: Evento[];
@@ -80,7 +81,9 @@ export class EventosComponent implements OnInit {
       () => {
           template.hide();
           this.getEventos();
+          this.toastr.success('Deletado com Sucesso');
         }, error => {
+          this.toastr.error('Erro ao tentar Deletar');
           console.log(error);
         }
     );
