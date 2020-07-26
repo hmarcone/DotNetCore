@@ -1,9 +1,12 @@
+using System.IO;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using ProAgil.Domain.Entities;
 using ProAgil.Infrastructure.DbModels;
@@ -28,8 +31,8 @@ namespace ProAgil.WebApi
             services.AddDbContext<ProAgilContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IProAgilRepository, ProAgilRepository>();
 
-            //Versão 4.01 do AutoMapper.Extensions.Microsoft.DependencyInjection
-            services.AddAutoMapper();  //services.AddAutoMapper(typeof(Startup)); versão 8.0 do AutoMapper.Extensions.Microsoft.DependencyInjection
+            //Versï¿½o 4.01 do AutoMapper.Extensions.Microsoft.DependencyInjection
+            services.AddAutoMapper();  //services.AddAutoMapper(typeof(Startup)); versï¿½o 8.0 do AutoMapper.Extensions.Microsoft.DependencyInjection
 
             //AutoMapper.Mapper.Initialize(cfg => {
             //    cfg.AllowNullDestinationValues = true;
@@ -53,6 +56,11 @@ namespace ProAgil.WebApi
             //app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions(){
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
+            
             app.UseRouting();
 
             app.UseAuthorization();
