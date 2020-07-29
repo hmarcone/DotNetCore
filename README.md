@@ -8,7 +8,12 @@
 - EF Core
 - AutoMapper
 - Banco SQLite
-- Angula 10 (NGX Bootstrap, Reactive Forms, Upload de Imagens e Observable)
+- Angula 10 
+    - NGX Bootstrap
+    - Reactive Forms
+    - Upload de Imagens 
+    - NGX Toastr
+    - Observable
 
 ## Build & Run
 
