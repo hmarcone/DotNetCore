@@ -3,10 +3,12 @@
 ## Projeto para realizar gestão de Eventos
 
 - [Latest .NET Core 3.1 release]
+- Asp.NET Core Identity - (TOKEN - JWT)
+- Angular + JWT + .NET Core Identity
 - EF Core
 - AutoMapper
 - Banco SQLite
-- Angula 10 (NGX Bootstrap, Reactive Forms e Observable)
+- Angula 10 (NGX Bootstrap, Reactive Forms, Upload de Imagens e Observable)
 
 ## Build & Run
 
