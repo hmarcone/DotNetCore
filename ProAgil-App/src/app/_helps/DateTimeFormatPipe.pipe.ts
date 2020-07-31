@@ -8,7 +8,15 @@ import { Constants } from '../util/Constants';
 export class DateTimeFormatPipePipe extends DatePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return super.transform(value, Constants.DATE_TIME_FMT)
+    // return super.transform(value, Constants.DATE_TIME_FMT, 'pt-BR');
+    return super.transform(value, Constants.DATE_TIME_FMT);
   }
+
+  // transform(value: any, args?: any): any {
+  //   if (value){
+  //     var date = value instanceof Date ? value : new Date(value);
+  //     return super.transform(date, Constants.DATE_TIME_FMT);
+  //   }
+  // }
 
 }

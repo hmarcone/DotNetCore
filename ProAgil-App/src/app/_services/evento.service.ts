@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Evento } from '../_models/Evento';
 
@@ -9,8 +9,11 @@ import { Evento } from '../_models/Evento';
 export class EventoService {
   baseURL = 'http://localhost:5000/api/v1/Evento'; correta
   //baseURL = 'https://localhost:44366/api/v1/Evento';
+  //tokenHeader: HttpHeaders;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // this.tokenHeader = new HttpHeaders({ 'Authorization': `Bearer ${localStorage.getItem('token')}` });
+  }
 
   // tslint:disable-next-line:typedef
   getAllEvento(): Observable<Evento[]> {

@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate(['/dashboard']);
-          this.toastr.success('Logado com Sucesso');
+          this.toastr.success('Logado com sucesso');
         },
         error => {
-          this.toastr.error('Falha ao tentar Logar');
+          this.toastr.error('Falha ao tentar logar');
         }
       );
   }

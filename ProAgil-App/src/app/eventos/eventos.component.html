@@ -51,7 +51,10 @@
       <td>{{evento.id}}</td>
       <td>{{evento.nome}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento | DateTimeFormatPipe }}</td>
+      <td>{{evento.dataEvento}}</td>
+      <!-- <td>{{replaceDateBarraToTracoLineBreak(evento.dataEvento) | DateTimeFormatPipe }}</td> -->
+      <!-- <td>{{evento.dataEvento | DateTimeFormatPipe}}</td> -->
+      <!-- <td>{{evento.dataEvento | replace:'/':'-' }}</td> -->
       <td>{{evento.qtdPessoas}}</td>
       <td>
         <div *ngIf="!evento.lotes.length">

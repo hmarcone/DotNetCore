@@ -53,19 +53,20 @@ export class RegistrationComponent implements OnInit {
       this.user = Object.assign(
         { password: this.registerForm.get('passwords.password').value },
         this.registerForm.value);
+      console.log(this.user);
       this.authService.register(this.user).subscribe(
         () => {
           this.router.navigate(['/user/login']);
-          this.toastr.success('Cadastro Realizado');
+          this.toastr.success('Cadastro realizado');
         }, error => {
           const erro = error.error;
           erro.forEach(element => {
             switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Cadastro Duplicado!');
+                this.toastr.error('Cadastro duplicado!');
                 break;
               default:
-                this.toastr.error(`Erro no Cadatro! CODE: ${element.code}`);
+                this.toastr.error(`Erro no cadatro! CODE: ${element.code}`);
                 break;
             }
           });

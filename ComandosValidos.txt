@@ -14,3 +14,9 @@ dotnet ef --startup-project ../ProAgil.WebApi migrations add init
 Criando o banco de dados
 
 dotnet ef --startup-project ../ProAgil.WebApi database update
+
+Erro data
+'Unable to convert "31/07/2020 17:42:19" into a date' for pipe 'DatePipe'
+
+Para criar um gard
+ng g g auth/auth para criar um gard

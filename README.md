@@ -14,6 +14,7 @@
     - Upload de Imagens 
     - NGX Toastr
     - Observable
+    - Angular Gard
 
 ## Build & Run
 

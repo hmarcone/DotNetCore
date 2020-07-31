@@ -218,9 +218,16 @@ export class EventosComponent implements OnInit {
       this.eventos = _eventos;
       this.eventosFiltrados = this.eventos;
       console.log(_eventos);
+      console.log(`dataEvento ${_eventos[0].dataEvento}`);
+      console.log(`this.eventos ${this.eventos[0].dataEvento}`);
+      console.log(`this.eventosFiltrados ${this.eventosFiltrados[0].dataEvento}`);
     }, error => {
       this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
       console.log(error);
     });
+  }
+
+  replaceDateBarraToTracoLineBreak(s:string) {
+    return s && s.split('/').join('-');
   }
 }
