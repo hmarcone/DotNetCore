@@ -21,11 +21,11 @@ export class EventoService {
   }
 
   getEventoByTema(tema: string): Observable<Evento[]> {
-    return this.http.get<Evento[]>('${this.baseURL}/getByTema/${tema}');
+    return this.http.get<Evento[]>(`${this.baseURL}/getByTema/${tema}`);
   }
 
-  getEventoById(id: number): Observable<Evento[]> {
-    return this.http.get<Evento[]>('${this.baseURL}/${id}');
+  getEventoById(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`${this.baseURL}/${id}`);
   }
 
   postUpload(file: File, name: string) {

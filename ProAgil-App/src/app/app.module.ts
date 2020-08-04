@@ -10,6 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMaskModule } from 'ngx-mask'
 import { ToastrModule } from 'ngx-toastr';
 
 import { EventoService } from './_services/evento.service';
@@ -17,7 +18,7 @@ import { EventoService } from './_services/evento.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
-//import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
+import { EventoEditComponent } from './eventos/eventoEdit/eventoEdit.component';
 import { NavComponent } from './nav/nav.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -33,7 +34,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 @NgModule({
    declarations: [
       AppComponent,
-      //EventoEditComponent,
+      EventoEditComponent,
       NavComponent,
       EventosComponent,
       PalestrantesComponent,
@@ -52,6 +53,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
       TooltipModule.forRoot(),
       ModalModule.forRoot(),
       TabsModule.forRoot(),
+      NgxMaskModule.forRoot(),
       BrowserAnimationsModule,
       //ToastrModule.forRoot(),
       ToastrModule.forRoot({
