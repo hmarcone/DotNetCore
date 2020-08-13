@@ -133,4 +133,30 @@ export class EventoEditComponent implements OnInit {
     reader.readAsDataURL(file[0]);
   }
 
+  salvarEvento() {
+    this.evento = Object.assign({ id: this.evento.id }, this.registerForm.value);
+    this.evento.imagemURL = this.fileNameToUpdate;
+
+    this.uploadImagem();
+
+    this.eventoService.putEvento(this.evento).subscribe(
+      () => {
+        this.toastr.success('Editado com Sucesso!');
+      }, error => {
+        this.toastr.error(`Erro ao Editar: ${error}`);
+      }
+    );
+  }
+
+  uploadImagem() {
+    if (this.registerForm.get('imagemURL').value !== '') {
+      this.eventoService.postUpload(this.file, this.fileNameToUpdate)
+        .subscribe(
+          () => {
+            this.dataAtual = new Date().getMilliseconds().toString();
+            this.imagemURL = `http://localhost:5000/resources/images/${this.evento.imagemURL}?_ts=${this.dataAtual}`;
+          }
+        );
+    }
+  }  
 }
