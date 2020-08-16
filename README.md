@@ -15,6 +15,10 @@
     - NGX Toastr
     - Observable
     - Angular Gard
+    - ngx-currency - https://www.npmjs.com/package/ngx-currency
+    - Bootswatch - https://www.npmjs.com/package/bootswatch
+    - Bootsnipp - https://bootsnipp.com/snippets/aMp3k
+- Deploy Angular - https://angular.io/guide/deployment
 
 ## Build & Run
 
@@ -26,3 +30,18 @@ cd ProAgil-App
 npm install
 ng serve -o
 ```
+
+## Deploy Angular
+
+- Instalar source-map
+    - npm install source-map-explorer --save-dev
+    - ng build --prod --source-map
+    - ls dist/*.bundle.js
+
+## Publish DotNet WebApi
+
+-  dotnet publish -o C:\Users\humbe\Desktop\ProAgil
+    - cd C:\Users\humbe\Desktop\ProAgil
+    - dotnet ProAgil.WebApi.dll
+    - observar se será necessário a criação da pasta Resources
+    - Verificar se o banco SQLite está corrompido e buscar na pasta de desenvolvimento
